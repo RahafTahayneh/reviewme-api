@@ -11,7 +11,6 @@ export const createNewUser = async (req, res, next) => {
         password: await hashPassword(req.body.password),
       },
     });
-    console.log(user);
     const token = createJWT(user);
     res.json({ token });
   } catch (error) {
