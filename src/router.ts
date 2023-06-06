@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { body } from "express-validator";
+import { deleteProduct, updateProduct } from "./handlers/product";
 import {
   getAllReviews,
   getReviewById,
@@ -32,5 +33,7 @@ router.put("/review/:id", updateReview);
 router.delete("/review/:id", deleteReview);
 
 // Product
+router.put("/product/:id", updateProduct);
+router.put("/product/:id", deleteProduct);
 
 export default router;

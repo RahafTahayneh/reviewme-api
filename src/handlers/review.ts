@@ -90,6 +90,12 @@ export const deleteReview = async (req, res, next) => {
         id: req.params.id,
       },
     });
+    await prisma.product.delete({
+      where: {
+        id: review.productId,
+      },
+    });
+
     res.json({ data: deleted });
   } catch (error) {
     next(error);
