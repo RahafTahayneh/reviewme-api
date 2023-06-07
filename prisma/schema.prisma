@@ -39,11 +39,11 @@ model Review {
 }
 
 model Product {
-  id        String   @id @default(uuid())
-  name      String
-  images    String[]
-  productId String?
-  link      String
-  storeName String
-  Review    Review?
+  id             String   @id @default(uuid())
+  name           String
+  images         String[]
+  storeProductId String?
+  link           String
+  storeName      String
+  Review         Review?
 }
