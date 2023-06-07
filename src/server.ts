@@ -12,10 +12,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
+app.use("/api", protect, router);
+
 app.post("/user", createNewUser);
 app.post("/signin", signIn);
-
-app.use("/api", protect, router);
 
 app.use((err, req, res, next) => {
   switch (err.type) {

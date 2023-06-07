@@ -15,8 +15,11 @@ const router = Router();
 
 // Review
 router.get("/review", getAllReviews);
+
 router.get("/review/user", getUserReviews);
+
 router.get("/review/:id", getReviewById);
+
 router.post(
   "/review",
   body("title").isString(),
@@ -29,11 +32,14 @@ router.post(
   handleInputErrors,
   createReview
 );
+
 router.put("/review/:id", updateReview);
+
 router.delete("/review/:id", deleteReview);
 
 // Product
 router.put("/product/:id", updateProduct);
+
 router.put("/product/:id", deleteProduct);
 
 export default router;

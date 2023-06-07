@@ -5,7 +5,7 @@ export const getAllReviews = async (req, res) => {
     const reviews = await prisma.review.findMany({
       orderBy: { createdAt: "desc" },
     });
-    res.json({ data: reviews });
+    res.json({ reviews });
   } catch (e) {
     res.status(500).json({ message: "Internal Server error" });
   }
@@ -13,7 +13,7 @@ export const getAllReviews = async (req, res) => {
 
 export const getUserReviews = async (req, res) => {
   try {
-    const reviews = await prisma.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: {
         id: req.user.id,
       },
@@ -21,7 +21,7 @@ export const getUserReviews = async (req, res) => {
         reviews: true,
       },
     });
-    res.json({ data: reviews });
+    res.json({ reviews: user.reviews });
   } catch (error) {
     res.status(500).json({ message: "Internal Server error" });
   }
@@ -34,7 +34,7 @@ export const getReviewById = async (req, res) => {
         id: req.params.id,
       },
     });
-    res.json({ data: review });
+    res.json({ review });
   } catch (error) {
     res.status(500).json({ message: "Internal Server error" });
   }
@@ -42,7 +42,6 @@ export const getReviewById = async (req, res) => {
 
 export const createReview = async (req, res, next) => {
   try {
-    console.log(req.body);
     const { title, feedback, rate, name, link, storeName, images } = req.body;
 
     const review = await prisma.review.create({
