@@ -42,15 +42,24 @@ export const getReviewById = async (req, res) => {
 
 export const createReview = async (req, res, next) => {
   try {
-    const { title, feedback, rate, productId } = req.body;
+    const { title, feedback, rate, name, link, storeName } = req.body;
 
     const review = await prisma.review.create({
       data: {
         title,
         feedback,
         rate,
-        productId,
         belongsToId: req.user.id,
+        product: {
+          create: {
+            name,
+            link,
+            storeName,
+          },
+        },
+      },
+      include: {
+        product: true,
       },
     });
     res.json({ data: review });

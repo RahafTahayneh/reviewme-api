@@ -31,9 +31,10 @@ model Review {
   updatedAt   DateTime @updatedAt
   rate        Decimal
   belongsToId String
-  belongsTo   User?    @relation(fields: [belongsToId], references: [id])
   productId   String   @unique
   product     Product  @relation(fields: [productId], references: [id])
+  userId      String?
+  User        User?    @relation(fields: [userId], references: [id])
 
   @@unique([id, belongsToId])
 }
@@ -45,8 +46,5 @@ model Product {
   productId String?
   link      String
   storeName String
-  reviewId  String?
-  review    Review?
-
-  @@unique([id, reviewId])
+  Review    Review?
 }

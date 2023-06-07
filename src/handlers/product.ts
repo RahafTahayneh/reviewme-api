@@ -1,13 +1,20 @@
 import prisma from "../db";
 
+export const createProduct = async (req, res, next) => {
+  try {
+    const product = await prisma.product.create({
+      data: req.body,
+    });
+    res.json({ data: product });
+  } catch (e) {
+    next(e);
+  }
+};
 export const updateProduct = async (req, res, next) => {
   try {
     const product = await prisma.product.update({
       where: {
-        id_reviewId: {
-          id: req.params.id,
-          reviewId: req.body.id,
-        },
+        id: req.params.id,
       },
 
       data: req.body,
