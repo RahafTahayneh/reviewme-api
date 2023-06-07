@@ -33,8 +33,7 @@ model Review {
   belongsToId String
   productId   String   @unique
   product     Product  @relation(fields: [productId], references: [id])
-  userId      String?
-  User        User?    @relation(fields: [userId], references: [id])
+  user        User     @relation(fields: [belongsToId], references: [id])
 
   @@unique([id, belongsToId])
 }
