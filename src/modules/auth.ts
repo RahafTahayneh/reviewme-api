@@ -7,9 +7,12 @@ export const comparePassword = (password, hash) =>
 export const hashPassword = (password) => bcrypt.hash(password, 5);
 
 export const createJWT = (user) => {
+  const iat = Math.floor(Date.now() / 1000);
+  const exp = iat + 60 * 60 * 24 * 7;
   const token = jwt.sign(
     { id: user.id, username: user.username },
-    process.env.JWT_SECRET
+    process.env.JWT_SECRET,
+    { expiresIn: exp }
   );
 
   return token;
